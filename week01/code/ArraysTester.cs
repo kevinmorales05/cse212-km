@@ -4,13 +4,13 @@ public static class ArraysTester {
     /// </summary>
     public static void Run() {
         // Sample Test Cases (may not be comprehensive)
-        Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
-        double[] multiples = MultiplesOf(7, 5);
-        Console.WriteLine($"<double>{{{string.Join(',', multiples)}}}"); // <double>{7, 14, 21, 28, 35}
-        multiples = MultiplesOf(1.5, 10);
-        Console.WriteLine($"<double>{{{string.Join(',', multiples)}}}"); // <double>{1.5, 3.0, 4.5, 6.0, 7.5, 9.0, 10.5, 12.0, 13.5, 15.0}
-        multiples = MultiplesOf(-2, 10);
-        Console.WriteLine($"<double>{{{string.Join(',', multiples)}}}"); // <double>{-2, -4, -6, -8, -10, -12, -14, -16, -18, -20}
+        // Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
+        // double[] multiples = MultiplesOf(7, 5);
+        // Console.WriteLine($"<double>{{{string.Join(',', multiples)}}}"); // <double>{7, 14, 21, 28, 35}
+        // multiples = MultiplesOf(1.5, 10);
+        // Console.WriteLine($"<double>{{{string.Join(',', multiples)}}}"); // <double>{1.5, 3.0, 4.5, 6.0, 7.5, 9.0, 10.5, 12.0, 13.5, 15.0}
+        // multiples = MultiplesOf(-2, 10);
+        // Console.WriteLine($"<double>{{{string.Join(',', multiples)}}}"); // <double>{-2, -4, -6, -8, -10, -12, -14, -16, -18, -20}
 
         Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
         List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
