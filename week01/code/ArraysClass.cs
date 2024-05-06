@@ -28,9 +28,7 @@ public static class ArrayClass
         RotateListRight(numbers, 9);
         Console.WriteLine($"<List>{{{string.Join(',', RotateListRight(numbers, 9))}}}"); // <List>{1, 2, 3, 4, 5, 6, 7, 8, 9}
     }
-    /// <summary>
-
-
+  
     private static double[] MultiplesOf(double number, int length)
     {
         double[] multiplesArray = [];
@@ -78,14 +76,6 @@ public static class ArrayClass
         return multiplesArray; // replace this return statement with your own
     }
 
-    /// <summary>
-    /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
-    /// <c>&lt;List&gt;{1, 2, 3, 4, 5, 6, 7, 8, 9}</c> and an amount is 3 then the list returned should be 
-    /// <c>&lt;List&gt;{7, 8, 9, 1, 2, 3, 4, 5, 6}</c>.  The value of amount will be in the range of <c>1</c> and 
-    /// <c>data.Count</c>.
-    /// <br /><br />
-    /// Because a list is dynamic, this function will modify the existing <c>data</c> list rather than returning a new list.
-    /// </summary>
     private static List<int> RotateListRight(List<int> data, int amount)
     {
         // TODO Problem 2 Start
