@@ -47,22 +47,19 @@ public static class ArrayClass
             //3. omit the number 0
             if (start % number == 0)
             {
-               if(start == 0){
-                Console.WriteLine("Here we find a Zero!");
-               }
-               else {
-                //4. Increse the counter because we just want the determined quantity of multiples
-                counter++;
-                //5. Create a new array with one more space
-                double[] newArray = new double[multiplesArray.Length + 1];
-                //6. Copy the array
-                Array.Copy(multiplesArray, newArray, multiplesArray.Length);
-                //7. Add the new element to the array
-                newArray[multiplesArray.Length] = start;
-                //8. Update the array
-                multiplesArray = newArray;
-               }
-                
+                if (start != 0)
+                {
+                    //4. Increse the counter because we just want the determined quantity of multiples
+                    counter++;
+                    //5. Create a new array with one more space
+                    double[] newArray = new double[multiplesArray.Length + 1];
+                    //6. Copy the array
+                    Array.Copy(multiplesArray, newArray, multiplesArray.Length);
+                    //7. Add the new element to the array
+                    newArray[multiplesArray.Length] = start;
+                    //8. Update the array
+                    multiplesArray = newArray;
+                }
             }
             if (number < 0)
             {
@@ -71,7 +68,7 @@ public static class ArrayClass
             }
             else
             {
-                 //10. If the number is positive increase 0.5
+                //10. If the number is positive increase 0.5
                 start = start + 0.5;
             }
 
