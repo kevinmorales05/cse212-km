@@ -6,6 +6,7 @@
 
         var result = "";
         while (stack.Count > 0)
+            //Console.WriteLine(stack.Pop());
             result += stack.Pop();
 
         return result;
