@@ -1,3 +1,5 @@
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 
 public static class SetsAndMapsTester {
@@ -108,9 +110,32 @@ public static class SetsAndMapsTester {
     /// </summary>
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     private static void DisplayPairs(string[] words) {
-        // To display the pair correctly use something like:
-        // Console.WriteLine($"{word} & {pair}");
-        // Each pair of words should displayed on its own line.
+        //1. Create a new hashset
+        HashSet<Tuple<string, string>> newHash = new HashSet<Tuple<string, string>>();
+        //2. Create a new hashset of strings
+        HashSet<string> repeatedWords = new HashSet<string>();
+        //3. loop all of the words to analize each one
+        foreach (var element in words) {
+            string reverseWords = new string(new char[] { element[1], element[0]});
+        //4. Validate repeated word in no reverse case
+            if(repeatedWords.Contains(element)){
+                Console.WriteLine("Repeated word!");
+            }
+        //5. Validate repeated words with the reverse
+            else {
+                if(repeatedWords.Contains(reverseWords)){
+         //6. Add an element to the new hash       
+                newHash.Add(Tuple.Create(element, reverseWords));
+                }
+                else {
+        //7. Add new word to the repeated word hashset
+                    repeatedWords.Add(element);
+                }
+            }
+        }
+       foreach( var pair in newHash){
+            Console.WriteLine($"{pair.Item1} & {pair.Item2}");
+       }
     }
 
     /// <summary>
@@ -132,7 +157,28 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            //Console.WriteLine(fields[3]);
+            //1. analize a new degree
+            if(degrees.ContainsKey(fields[3])){
+                //Console.WriteLine("Repeated degree!");
+            //2. Add one more person    
+                int quantityOfStudents = degrees[fields[3]];
+                quantityOfStudents++;
+            //3. Remove the old hash
+                degrees.Remove(fields[3]);
+            //4. Add a hash with the new students number
+                degrees.Add(fields[3],quantityOfStudents);
+            }
+            else{
+            //5. add a new degree and one person
+            degrees.Add(fields[3], 1);
+            //Console.WriteLine($"New degree{fields[3]}");
+            }
+            
+
         }
+
+//degree earned and number of people
 
         return degrees;
     }
@@ -157,8 +203,71 @@ public static class SetsAndMapsTester {
     /// # Problem 3 #
     /// #############
     private static bool IsAnagram(string word1, string word2) {
-        // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+        //1. eliminate spaces
+        //2. convert to lowcase
+        string processedWord1 = word1.Replace(" ", "").ToLower();
+        string processedWord2 = word2.Replace(" ", "").ToLower();
+        //3. create a hashmap
+        var hashedWord1 = new Dictionary<string, int>();
+
+        //4. iteraty the word 1
+        foreach(var letter in processedWord1){
+            
+        //5. identify repeated letters and increase the counter
+            if(hashedWord1.ContainsKey(letter.ToString())){
+                int quantityOfLetters = hashedWord1[letter.ToString()];
+                 //6. Increase the number of the key
+                quantityOfLetters++;
+                hashedWord1.Remove(letter.ToString());
+                hashedWord1.Add(letter.ToString(),quantityOfLetters);
+            }
+            else {
+             //7. Convert the letter to string and add to the hashmap
+                hashedWord1.Add(letter.ToString(), 1);
+            }
+
+         
+        }
+        //4. iteraty the word 2
+         var hashedWord2 = new Dictionary<string, int>();
+        foreach(var letter in processedWord2){
+            
+        //5. identify repeated letters and increase the counter
+            if(hashedWord2.ContainsKey(letter.ToString())){
+                int quantityOfLetters = hashedWord2[letter.ToString()];
+                 //6. Increase the number of the key
+                quantityOfLetters++;
+                hashedWord2.Remove(letter.ToString());
+                hashedWord2.Add(letter.ToString(),quantityOfLetters);
+            }
+            else {
+             //7. Convert the letter to string and add to the hashmap
+                hashedWord2.Add(letter.ToString(), 1);
+            }
+         
+        }
+
+        //4. loop the word2 and compare the letter with the hashmap of the words1
+        
+        foreach(var value in hashedWord1){
+            if(hashedWord2.ContainsKey(value.Key)){
+                if(hashedWord2[value.Key] == value.Value){
+
+                }
+                else{
+                     //Console.WriteLine("Contains the word but not the repeated times");
+                    return false;
+                }
+               
+            }
+            else {
+                //Console.WriteLine("Word not available in the other word");
+                return false;
+            }
+            
+        }
+        
+        return true;
     }
 
     /// <summary>
