@@ -1,9 +1,12 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
-public static class SetsAndMapsTester {
-    public static void Run() {
+public static class SetsAndMapsTester
+{
+    public static void Run()
+    {
         // Problem 1: Find Pairs with Sets
         Console.WriteLine("\n=========== Finding Pairs TESTS ===========");
         DisplayPairs(new[] { "am", "at", "ma", "if", "fi" });
@@ -109,33 +112,40 @@ public static class SetsAndMapsTester {
     /// that there were no duplicates) and therefore should not be displayed.
     /// </summary>
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
-    private static void DisplayPairs(string[] words) {
+    private static void DisplayPairs(string[] words)
+    {
         //1. Create a new hashset
         HashSet<Tuple<string, string>> newHash = new HashSet<Tuple<string, string>>();
         //2. Create a new hashset of strings
         HashSet<string> repeatedWords = new HashSet<string>();
         //3. loop all of the words to analize each one
-        foreach (var element in words) {
-            string reverseWords = new string(new char[] { element[1], element[0]});
-        //4. Validate repeated word in no reverse case
-            if(repeatedWords.Contains(element)){
+        foreach (var element in words)
+        {
+            string reverseWords = new string(new char[] { element[1], element[0] });
+            //4. Validate repeated word in no reverse case
+            if (repeatedWords.Contains(element))
+            {
                 Console.WriteLine("Repeated word!");
             }
-        //5. Validate repeated words with the reverse
-            else {
-                if(repeatedWords.Contains(reverseWords)){
-         //6. Add an element to the new hash       
-                newHash.Add(Tuple.Create(element, reverseWords));
+            //5. Validate repeated words with the reverse
+            else
+            {
+                if (repeatedWords.Contains(reverseWords))
+                {
+                    //6. Add an element to the new hash       
+                    newHash.Add(Tuple.Create(element, reverseWords));
                 }
-                else {
-        //7. Add new word to the repeated word hashset
+                else
+                {
+                    //7. Add new word to the repeated word hashset
                     repeatedWords.Add(element);
                 }
             }
         }
-       foreach( var pair in newHash){
+        foreach (var pair in newHash)
+        {
             Console.WriteLine($"{pair.Item1} & {pair.Item2}");
-       }
+        }
     }
 
     /// <summary>
@@ -152,33 +162,37 @@ public static class SetsAndMapsTester {
     /// #############
     /// # Problem 2 #
     /// #############
-    private static Dictionary<string, int> SummarizeDegrees(string filename) {
+    private static Dictionary<string, int> SummarizeDegrees(string filename)
+    {
         var degrees = new Dictionary<string, int>();
-        foreach (var line in File.ReadLines(filename)) {
+        foreach (var line in File.ReadLines(filename))
+        {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
             //Console.WriteLine(fields[3]);
             //1. analize a new degree
-            if(degrees.ContainsKey(fields[3])){
+            if (degrees.ContainsKey(fields[3]))
+            {
                 //Console.WriteLine("Repeated degree!");
-            //2. Add one more person    
+                //2. Add one more person    
                 int quantityOfStudents = degrees[fields[3]];
                 quantityOfStudents++;
-            //3. Remove the old hash
+                //3. Remove the old hash
                 degrees.Remove(fields[3]);
-            //4. Add a hash with the new students number
-                degrees.Add(fields[3],quantityOfStudents);
+                //4. Add a hash with the new students number
+                degrees.Add(fields[3], quantityOfStudents);
             }
-            else{
-            //5. add a new degree and one person
-            degrees.Add(fields[3], 1);
-            //Console.WriteLine($"New degree{fields[3]}");
+            else
+            {
+                //5. add a new degree and one person
+                degrees.Add(fields[3], 1);
+                //Console.WriteLine($"New degree{fields[3]}");
             }
-            
+
 
         }
 
-//degree earned and number of people
+        //degree earned and number of people
 
         return degrees;
     }
@@ -202,7 +216,8 @@ public static class SetsAndMapsTester {
     /// #############
     /// # Problem 3 #
     /// #############
-    private static bool IsAnagram(string word1, string word2) {
+    private static bool IsAnagram(string word1, string word2)
+    {
         //1. eliminate spaces
         //2. convert to lowcase
         string processedWord1 = word1.Replace(" ", "").ToLower();
@@ -211,69 +226,78 @@ public static class SetsAndMapsTester {
         var hashedWord1 = new Dictionary<string, int>();
 
         //4. iteraty the word 1
-        foreach(var letter in processedWord1){
-            
-        //5. identify repeated letters and increase the counter
-            if(hashedWord1.ContainsKey(letter.ToString())){
+        foreach (var letter in processedWord1)
+        {
+
+            //5. identify repeated letters and increase the counter
+            if (hashedWord1.ContainsKey(letter.ToString()))
+            {
                 int quantityOfLetters = hashedWord1[letter.ToString()];
-                 //6. Increase the number of the key
+                //6. Increase the number of the key
                 quantityOfLetters++;
                 hashedWord1.Remove(letter.ToString());
-                hashedWord1.Add(letter.ToString(),quantityOfLetters);
+                hashedWord1.Add(letter.ToString(), quantityOfLetters);
             }
-            else {
-             //7. Convert the letter to string and add to the hashmap
+            else
+            {
+                //7. Convert the letter to string and add to the hashmap
                 hashedWord1.Add(letter.ToString(), 1);
             }
 
-         
+
         }
-        //4. iteraty the word 2
-         var hashedWord2 = new Dictionary<string, int>();
-        foreach(var letter in processedWord2){
-            
-        //5. identify repeated letters and increase the counter
-            if(hashedWord2.ContainsKey(letter.ToString())){
+        //8. iteraty the word 2
+        var hashedWord2 = new Dictionary<string, int>();
+        foreach (var letter in processedWord2)
+        {
+
+            //9. identify repeated letters and increase the counter
+            if (hashedWord2.ContainsKey(letter.ToString()))
+            {
                 int quantityOfLetters = hashedWord2[letter.ToString()];
-                 //6. Increase the number of the key
+                //10. Increase the number of the key
                 quantityOfLetters++;
                 hashedWord2.Remove(letter.ToString());
-                hashedWord2.Add(letter.ToString(),quantityOfLetters);
+                hashedWord2.Add(letter.ToString(), quantityOfLetters);
             }
-            else {
-             //7. Convert the letter to string and add to the hashmap
+            else
+            {
+                //11. Convert the letter to string and add to the hashmap
                 hashedWord2.Add(letter.ToString(), 1);
             }
-         
+
         }
 
-        //4. loop the word2 and compare the letter with the hashmap of the words1
-        
-        foreach(var value in hashedWord1){
-            if(hashedWord2.ContainsKey(value.Key)){
-                if(hashedWord2[value.Key] == value.Value){
+        //10. loop the hashedWord1 and compare with the elements of the hashedWord2
 
-                }
-                else{
-                     //Console.WriteLine("Contains the word but not the repeated times");
+        foreach (var value in hashedWord1)
+        {
+            //11.Identify if the key exists or not
+            if (hashedWord2.ContainsKey(value.Key))
+            {
+                //12.Identify if the letters are repeated the same quantity of times
+                if (hashedWord2[value.Key] != value.Value)
+                {
                     return false;
                 }
-               
+
             }
-            else {
+            else
+            {
                 //Console.WriteLine("Word not available in the other word");
                 return false;
             }
-            
+
         }
-        
+
         return true;
     }
 
     /// <summary>
     /// Sets up the maze dictionary for problem 4
     /// </summary>
-    private static Dictionary<ValueTuple<int, int>, bool[]> SetupMazeMap() {
+    private static Dictionary<ValueTuple<int, int>, bool[]> SetupMazeMap()
+    {
         Dictionary<ValueTuple<int, int>, bool[]> map = new() {
             { (1, 1), new[] { false, true, false, true } },
             { (1, 2), new[] { false, true, true, false } },
@@ -329,20 +353,46 @@ public static class SetsAndMapsTester {
     /// https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
     /// 
     /// </summary>
-    private static void EarthquakeDailySummary() {
+    private static void EarthquakeDailySummary()
+    {
         const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+        //1. create a new http client
         using var client = new HttpClient();
+        //2. get the information
         using var getRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
         using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
         using var reader = new StreamReader(jsonStream);
         var json = reader.ReadToEnd();
+        //3. Create a new object to deserialize
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
+        //4.  Print each place an earthquake has happened today and its magnitude.
+        foreach (var feature in featureCollection.Features)
+        {
+            Console.WriteLine($"Place of Earthquake: {feature.Properties.Place}, Magnitude: {feature.Properties.Magnitude}");
+        }
+    }
+    //Create a class feature collection
+    public class FeatureCollection
+    {
+        [JsonPropertyName("features")]
+        public List<Feature> Features { get; set; }
+    }
 
-        // TODO:
-        // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
-        // on those classes so that the call to Deserialize above works properly.
-        // 2. Add code below to print out each place a earthquake has happened today and its magitude.
+   //Create a Feature class
+    public class Feature
+    {
+        [JsonPropertyName("properties")]
+        public Properties Properties { get; set; }
+    }
+//Create a property class
+    public class Properties
+    {
+        [JsonPropertyName("place")]
+        public string Place { get; set; }
+
+        [JsonPropertyName("mag")]
+        public double? Magnitude { get; set; }
     }
 }
